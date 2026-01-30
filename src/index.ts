@@ -6,15 +6,16 @@ import fs from 'fs';
 const app = express();
 
 const server = https.createServer({
-  key: fs.readFileSync('./ssl/key.pem'), 
+  key: fs.readFileSync('./ssl/key.pem'),
   cert: fs.readFileSync('./ssl/cert.pem'),
-},app);
+}, app);
 
 const io = new Server(server, {
   cors: {
     origin: '*',
     methods: ['GET', 'POST'],
   },
+  transports: ["websocket"],
 });
 
 const userData: { userId: string, name: string, roomId: string, isInitiator: boolean }[] = [];
@@ -90,6 +91,8 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(process.env.PORT, () => {
-  console.log('Server running on http://0.0.0.0:5000');
+
+const PORT = parseInt(process.env.PORT || '5000', 10);
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
