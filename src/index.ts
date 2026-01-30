@@ -5,10 +5,7 @@ import fs from 'fs';
 
 const app = express();
 
-const server = https.createServer({
-  key: fs.readFileSync('./ssl/key.pem'),
-  cert: fs.readFileSync('./ssl/cert.pem'),
-}, app);
+const server = https.createServer(app);
 
 const io = new Server(server, {
   cors: {
