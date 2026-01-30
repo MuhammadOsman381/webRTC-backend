@@ -8,7 +8,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "https://localhost:5173",
-      "https://your-frontend.vercel.app", 
+      "https://web-rtc-client-one.vercel.app", 
     ],
     methods: ["GET", "POST"],
     credentials: true,
