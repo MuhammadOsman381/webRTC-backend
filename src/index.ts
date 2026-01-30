@@ -90,6 +90,6 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(5000, "0.0.0.0", () => {
+server.listen(process.env.PORT, () => {
   console.log('Server running on http://0.0.0.0:5000');
 });
