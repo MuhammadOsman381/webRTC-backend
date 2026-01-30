@@ -1,12 +1,10 @@
 import express from 'express';
 import https from 'https';
 import { Server } from 'socket.io';
-import fs from 'fs';
 
 const app = express();
 
 const server = https.createServer(app);
-
 
 const io = new Server(server, {
   cors: {
