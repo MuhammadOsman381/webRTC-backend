@@ -1,10 +1,14 @@
 import express from 'express';
 import https from 'https';
 import { Server } from 'socket.io';
+import fs from 'fs';
 
 const app = express();
 
-const server = https.createServer(app);
+const server = https.createServer({
+  key: fs.readFileSync('./ssl/key.pem'), 
+  cert: fs.readFileSync('./ssl/cert.pem'),
+},app);
 
 const io = new Server(server, {
   cors: {
@@ -86,6 +90,6 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(5000, () => {
-  console.log('Server running on http://localhost:5000');
+server.listen(5000, "0.0.0.0", () => {
+  console.log('Server running on http://0.0.0.0:5000');
 });
