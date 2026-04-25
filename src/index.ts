@@ -1,5 +1,5 @@
 import express from 'express';
-import { createServer } from 'http'; 
+import { createServer } from 'http';
 import { Server } from 'socket.io';
 
 const app = express();
@@ -8,7 +8,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "https://localhost:5173",
-      "https://web-rtc-client-one.vercel.app", 
+      "https://web-rtc-client-one.vercel.app",
     ],
     methods: ["GET", "POST"],
     credentials: true,
@@ -89,6 +89,11 @@ io.on("connection", (socket) => {
 });
 
 const PORT = parseInt(process.env.PORT || "5000", 10);
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });
